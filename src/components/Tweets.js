@@ -7,43 +7,52 @@ class Tweets extends React.Component {
     super(props);
     this.state = {
       tweets: {
-        tweet0: { text: 'this is a tweet', date: new Date() },
-        tweet1: { text: 'this is also a tweet', date: new Date() }
+        tweet0: { tweetText: 'this is a tweet', date: new Date() },
+        tweet1: { tweetText: 'this is also a tweet', date: new Date() }
       },
       newTweetIdx: 0
     }
   }
 
-  createTweet = (tweetText) => {
+  createTweet = (newTweetText) => {
     const tweetIdx = this.state.newTweetIdx;
     const tweetName = 'tweet' + tweetIdx;
-    const tweetObj = {text: tweetText, date: new Date()}
+    const tweetObj = {tweetText: newTweetText, date: new Date()}
     this.setState(this.state.tweets[tweetName] = tweetObj)
     this.setState({newTweetIdx: tweetIdx + 1})
   }
 
   getTweetText = (tweetName) => {
     const selectedTweet = this.state.tweets[tweetName]
-    const tweetText = selectedTweet[text]
-    return tweetText
+    const selectedTweetText = selectedTweet["tweetText"]
+    return selectedTweetText
   }
 
-  editTweet = (tweetName, tweetText) => {
-    this.setState(this.state.tweets[tweetName] = tweetText)
+  editTweet = (tweetName, newTweetText) => {
+    this.setState(this.state.tweets.tweetName["tweetText"] = newTweetText)
   }
 
   deleteTweet = (tweetName) => {
     this.setState( delete this.state.tweets[tweetName])
   }
 
+  toDateString = (dateObj) => {
+    const month = dateObj.getUTCMonth() + 1;
+    const day = dateObj.getUTCDate();
+    const year = dateObj.getUTCFullYear();
+
+    return month + "/" + day + "/" + year;
+  }
+
   render() {
 
     let oldTweets = [];
+    console.log('hello?')
 
-    for (let key in this.state.tweets) {
-      console.log('this key is ' + key)
-      console.log('this keys text value is ' + this.state.tweets.key)
-      oldTweets.push([key.text, key.date])
+    for (let tweet in this.state.tweets) {
+      console.log('this tweets name is ' + tweet)
+      console.log('this tweets contents are ' + this.state.tweets[tweet])
+      oldTweets.push([tweet["tweetText"], tweet["date"]])
     }
 
     console.log(oldTweets);
