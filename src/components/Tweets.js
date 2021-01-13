@@ -18,20 +18,22 @@ class Tweets extends React.Component {
     const tweetIdx = this.state.newTweetIdx;
     const tweetName = 'tweet' + tweetIdx;
     const tweetObj = {text: tweetText, date: new Date()}
-    this.setState(tweets[tweetName] = tweetObj)
+    this.setState(this.state.tweets[tweetName] = tweetObj)
     this.setState({newTweetIdx: tweetIdx + 1})
   }
 
-  getTweetText = (tweet) => {
-
+  getTweetText = (tweetName) => {
+    const selectedTweet = this.state.tweets[tweetName]
+    const tweetText = selectedTweet[text]
+    return tweetText
   }
 
-  editTweet = () => {
-
+  editTweet = (tweetName, tweetText) => {
+    this.setState(this.state.tweets[tweetName] = tweetText)
   }
 
-  deleteTweet = () => {
-
+  deleteTweet = (tweetName) => {
+    this.setState( delete this.state.tweets[tweetName])
   }
 
   render() {
@@ -40,18 +42,24 @@ class Tweets extends React.Component {
 
     for (let key in this.state.tweets) {
       console.log('this key is ' + key)
-      console.log('this keys text value is ' + this.state.tweets.key[text])
+      console.log('this keys text value is ' + this.state.tweets.key)
       oldTweets.push([key.text, key.date])
     }
 
     console.log(oldTweets);
 
     return (
-      <div className='tweetContainer'>
-        <p> where the old tweets will go</p>
-        <button className="delete">delete</button>
-        <button className="edit">edit</button>
-      </div>
+      <>
+        <div className='newTweetContainer'>
+          <input placeholder='write a tweet' id="tweetForm">
+          </input>
+        </div>
+        <div className='tweetContainer'>
+          <p> where the old tweets will go</p>
+          <button className="delete">delete</button>
+          <button className="edit">edit</button>
+        </div>
+      </>
     )
   }
 }
