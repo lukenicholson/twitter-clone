@@ -47,12 +47,14 @@ class Tweets extends React.Component {
   render() {
 
     let oldTweets = [];
-    console.log('hello?')
+    console.log('rendering...')
 
     for (let tweet in this.state.tweets) {
-      console.log('this tweets name is ' + tweet)
-      console.log('this tweets contents are ' + this.state.tweets[tweet])
-      oldTweets.push([tweet["tweetText"], tweet["date"]])
+      // console.log('this tweets name is ' + tweet)
+      // console.log('this tweets text is "' + this.state.tweets[tweet]["tweetText"] + '"')
+      // console.log('this tweets date is ' + this.toDateString(this.state.tweets[tweet]["date"]))
+      oldTweets.push([tweet, this.state.tweets[tweet]["tweetText"], this.state.tweets[tweet]["date"]])
+      // in oldTweets array, 0 idx is tweetName, 1 idx is tweetText, 2 idx is date
     }
 
     console.log(oldTweets);
@@ -63,10 +65,16 @@ class Tweets extends React.Component {
           <input placeholder='write a tweet' id="tweetForm">
           </input>
         </div>
-        <div className='tweetContainer'>
+        <div className='oldTweetsContainer'>
+          {oldTweets.map((tweetArr) => (
+            <div className='oldTweet' id={tweetArr[0]}>
+              <p>{tweetArr[1]}</p>
+              <span>{tweetArr[2]}</span>
+              <button className="delete">delete</button>
+              <button className="edit">edit</button>
+            </div>
+          ))}
           <p> where the old tweets will go</p>
-          <button className="delete">delete</button>
-          <button className="edit">edit</button>
         </div>
       </>
     )
