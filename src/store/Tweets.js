@@ -1,6 +1,6 @@
 import Tweets from "../components/Tweets";
 
-let tweets = {
+const tweets = {
   tweet0: { tweetText: 'this is a tweet', date: new Date() },
   tweet1: { tweetText: 'this is also a tweet', date: new Date() }
 }

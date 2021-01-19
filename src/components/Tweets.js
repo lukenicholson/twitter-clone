@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 // import {toDateString} from '../util';
 
 
@@ -84,4 +85,16 @@ class Tweets extends React.Component {
   }
 }
 
-export default Tweets;
+Tweets.defaultProps = {
+ tweets: [],
+ newTweetIdx: 2
+}
+
+const mapStateToProps = state => {
+  return {
+    tweets: state.tweets,
+    newTweetIdx: state.newTweetIdx
+  }
+}
+
+export default connect(mapStateToProps)(Tweets);
