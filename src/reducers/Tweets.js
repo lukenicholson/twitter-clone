@@ -1,13 +1,12 @@
-let tweetsState = {
-  tweets: {
-    tweet0: { tweetText: 'this is a tweet', date: new Date() },
-    tweet1: { tweetText: 'this is also a tweet', date: new Date() }
-  },
-  newTweetIdx: 2
+import Tweets from "../components/Tweets";
+
+let tweets = {
+  tweet0: { tweetText: 'this is a tweet', date: new Date() },
+  tweet1: { tweetText: 'this is also a tweet', date: new Date() }
 }
 
 // reducer
-const tweets = (state = tweetsState, action) => {
+const tweetsReducer = (state = tweets, action) => {
   switch (action.type) {
     case 'CREATETWEET':
       const tweetIdx = state.newTweetIdx;
@@ -17,3 +16,5 @@ const tweets = (state = tweetsState, action) => {
       // this.setState({newTweetIdx: tweetIdx + 1})
   }
 }
+
+export default tweetsReducer;
