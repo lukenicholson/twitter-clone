@@ -10,7 +10,7 @@ class Tweets extends React.Component {
         tweet0: { tweetText: 'this is a tweet', date: new Date() },
         tweet1: { tweetText: 'this is also a tweet', date: new Date() }
       },
-      newTweetIdx: 0
+      newTweetIdx: 2
     }
   }
 
@@ -29,7 +29,7 @@ class Tweets extends React.Component {
   }
 
   editTweet = (tweetName, newTweetText) => {
-    this.setState(this.state.tweets.tweetName["tweetText"] = newTweetText)
+    this.setState(this.state.tweets[tweetName]["tweetText"] = newTweetText)
   }
 
   deleteTweet = (tweetName) => {
@@ -62,19 +62,22 @@ class Tweets extends React.Component {
     return (
       <>
         <div className='newTweetContainer'>
-          <input placeholder='write a tweet' id="tweetForm">
-          </input>
+          <form>
+            <input placeholder='write a tweet' id="tweetForm">
+            </input>
+            <button className="sendButton" onClick={(e) => this.createTweet(e.target.value)}> Send Tweet
+            </button>
+          </form>
         </div>
         <div className='oldTweetsContainer'>
           {oldTweets.map((tweetArr) => (
-            <div className='oldTweet' id={tweetArr[0]}>
+            <div className='oldTweet'id={tweetArr[0]} >
               <p>{tweetArr[1]}</p>
-              <span>{tweetArr[2]}</span>
-              <button className="delete">delete</button>
+              <span>{this.toDateString(tweetArr[2])}</span>
+              <button className="delete" onClick={(e) => this.deleteTweet(tweetArr[0])}>delete</button>
               <button className="edit">edit</button>
             </div>
           ))}
-          <p> where the old tweets will go</p>
         </div>
       </>
     )
